@@ -64,9 +64,9 @@ export default function Page() {
                 addDoc(collection(db, "responses"), data).then((res) => {
                     console.log(res.id);
                     localStorage.setItem("id", res.id);
+                    setShowPopup(true);
+                    setSubmitted(true);
                 })
-                setShowPopup(true);
-                setSubmitted(true);
             } catch (error) {
 
                 console.log(error);
@@ -144,7 +144,7 @@ export default function Page() {
                         <button onClick={onClickPrevious} disabled={renderIndex === 0} className="mx-4 text-white disabled:bg-gray-400 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                             Prev
                         </button>
-                        <button ref={buttonRefNext} onClick={onClickNext} disabled={(renderIndex == 3 && (Object.values(bdi).length < 21 || Object.values(bai).length < 21) || submitted)} className="text-white disabled:bg-gray-400 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                        <button ref={buttonRefNext} onClick={onClickNext} disabled={(renderIndex == 3 && (Object.values(bdi).length < 21 || Object.values(bai).length < 21) || (submitted && renderIndex == 3))} className="text-white disabled:bg-gray-400 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                             {renderIndex === 3 ? "Submit" : "Next"}
                         </button>
                     </div>

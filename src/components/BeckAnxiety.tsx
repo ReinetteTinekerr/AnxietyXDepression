@@ -25,7 +25,7 @@ let baiQuestions = [
 ];
 
 export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) {
-    const [selectedIndex, setSelectedIndex] = useState(Object.values(bai).length - 2);
+    const [selectedIndex, setSelectedIndex] = useState(Object.values(bai).length - 1);
     const [selectedQuestion, setSelectedQuestion] = useState(baiQuestions[selectedIndex]);
     // const [bai, setBai] = useState({ total: 0 });
 
