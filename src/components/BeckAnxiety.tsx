@@ -27,6 +27,7 @@ let baiQuestions = [
 export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) {
     const [selectedIndex, setSelectedIndex] = useState(Object.values(bai).length - 1);
     const [selectedQuestion, setSelectedQuestion] = useState(baiQuestions[selectedIndex]);
+    const [percentBar, setPercentBar] = useState(selectedIndex);
     // const [bai, setBai] = useState({ total: 0 });
 
     const id = localStorage.getItem("id");
@@ -38,6 +39,9 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
         setSelectedQuestion(baiQuestions[indexIncrement]);
         const score = parseInt(e.target.value);
         setBai((prev: any) => ({ ...prev, [selectedIndex]: parseInt(e.target.value), total: prev.total + score }));
+
+        const percent = Math.ceil(((indexIncrement) / baiQuestions.length) * 100);
+        setPercentBar(percent);
 
     }
     const scoreBG = (total: number) => {
@@ -64,7 +68,17 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
         <div className="flex justify-between">
 
             <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 ">Beck Anxiety Inventory</h3>
-            <h3 className="m-4 text-xl font-bold leading-none text-gray-900 ">{selectedIndex + 1} / {baiQuestions.length}</h3>
+
+            <div className="flex flex-row items-center mr-2">
+                <h3 className="m-4 text-sm leading-none text-gray-900 ">{selectedIndex + 1} / {baiQuestions.length}</h3>
+                <div className="flex flex-row">
+
+                    <div className="border-2 rounded-full w-24 h-4 bg-slate-400">
+                        <div className="rounded-full w-24 h-3 bg-emerald-500" style={{ "width": `${percentBar}%` }}></div>
+                        <div className="text-center justify-center text-sm text-black" >{percentBar}%</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <main className="flex  items-center flex-col justify-center">
             {(Object.values(bai).length === 22 || id !== null) ? <><div className={`p-8 text-white font-extrabold text-2xl rounded-md ${scoreBG(bai.total)}`}>

@@ -13,7 +13,7 @@ export default function Page() {
     const [renderIndex, setRenderIndex] = useState(0);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const buttonRefNext = useRef<HTMLButtonElement>(null);
-    const [registerData, setRegisterData] = useState({ username: "", age: 19, email: "", college: "", course: "" })
+    const [registerData, setRegisterData] = useState({ username: "", age: 19, email: "", college: "", course: "", gender: Number.POSITIVE_INFINITY })
     const [bai, setBai] = useState({ total: 0 });
     const [bdi, setBdi] = useState({ total: 0 });
     const [createdAt, setCreatedAt] = useState(null);
@@ -45,6 +45,8 @@ export default function Page() {
     }
 
     const onClickNext = () => {
+        console.log(registerData);
+
         if (renderIndex === 0) {
             buttonRef.current?.click();
             return;

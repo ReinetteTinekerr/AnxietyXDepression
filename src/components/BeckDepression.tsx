@@ -131,7 +131,8 @@ let bdiQuestions = [
 ]
 export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any }) {
     const [selectedBdiQuestion, setSelectedBdiQuestion] = useState(bdiQuestions[0]);
-    const [selectedIndex, setSelectedIndex] = useState(Object.values(bdi).length - 2);
+    const [selectedIndex, setSelectedIndex] = useState(Object.values(bdi).length - 1);
+    const [percentBar, setPercentBar] = useState(selectedIndex);
 
     const id = localStorage.getItem("id");
 
@@ -143,6 +144,12 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
         setSelectedBdiQuestion(bdiQuestions[indexIncrement]);
         const score = parseInt(e.target.value);
         setBdi((prev: any) => ({ ...prev, [selectedIndex]: parseInt(e.target.value), total: prev.total + score }));
+
+        const percent = Math.ceil(((indexIncrement + 1) / bdiQuestions.length) * 100);
+        // const percentBarCSS = `<div> w-[${percent}px] h-4 bg-emerald-600 absolute </div>`;
+        // console.log(selectedIndex, indexIncrement, percent);
+
+        setPercentBar(percent);
     };
 
     const scoreBG = (total: number) => {
@@ -180,46 +187,58 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
         <div className="flex justify-between">
 
             <h3 className="m-4 text-xl font-bold leading-none text-gray-900 ">Beck Depression Inventory</h3>
-            <h3 className="m-4 text-xl font-bold leading-none text-gray-900 ">{selectedIndex + 1} / {bdiQuestions.length}</h3>
-        </div>
-        {(Object.values(bdi).length === 22 || id !== null) ? <>
-            <div className={`p-8 text-center mx-20 lg:mx-80 text-white font-extrabold text-2xl rounded-md ${scoreBG(bdi.total)}`}>
-                Your Score is: <span>{bdi.total}</span><br />
-                <span>{scoreDescription(bdi.total)}</span></div>
-        </> :
-            <>
-                <div
-                    className="rounded-xl shadow-sm m-4 lg:mx-40 bg-gray-200 p-2"
-                    x-data="app"
-                >
-                    <div className="shadow-sm">
-                        <input type="radio" name="option" onClick={handleClick} value={"0"} id="1" className="peer hidden" />
-                        <label htmlFor="1"
-                            className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
-                        >{selectedBdiQuestion[0]}</label >
-                    </div>
+            <div className="flex flex-row items-center mr-2">
+                <h3 className="mr-2 text-sm leading-none text-gray-900 ">{selectedIndex + 1} / {bdiQuestions.length}</h3>
+                <div className="flex flex-row">
 
-                    <div className="shadow-sm">
-                        <input type="radio" name="option" onClick={handleClick} value={"1"} id="2" className="peer hidden" />
-                        <label htmlFor="2"
-                            className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-yellow-500 hover:text-white peer-checked:bg-yellow-500 peer-checked:font-bold peer-checked:text-white"
-                        >{selectedBdiQuestion[1]}</label >
-                    </div>
-
-                    <div className="shadow-sm">
-                        <input type="radio" name="option" onClick={handleClick} value={"2"} id="3" className="peer hidden" />
-                        <label htmlFor="3"
-                            className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-orange-500 hover:text-white peer-checked:bg-orange-500 peer-checked:font-bold peer-checked:text-white"
-                        >{selectedBdiQuestion[2]}</label >
-                    </div>
-
-                    <div className="shadow-sm">
-                        <input type="radio" name="option" onClick={handleClick} value={"3"} id="4" className="peer hidden" />
-                        <label htmlFor="4"
-                            className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-red-500 hover:text-white peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white"
-                        >{selectedBdiQuestion[3]}</label >
+                    <div className="border-2 rounded-full w-24 h-4 bg-slate-400">
+                        <div className="flex rounded-full w-24 h-3 bg-emerald-500" style={{ "width": `${percentBar}%` }}>
+                        </div>
+                        <div className="text-center justify-center text-sm text-black" >{percentBar}%</div>
                     </div>
                 </div>
-            </>}
+            </div>
+        </div>
+        <main className="flex  items-center flex-col justify-center">
+            {(Object.values(bdi).length === 22 || id !== null) ? <>
+                <div className={`p-8 text-center text-white font-extrabold text-2xl rounded-md ${scoreBG(bdi.total)}`}>
+                    Your Score is: <span>{bdi.total}</span><br />
+                    <span>{scoreDescription(bdi.total)}</span></div>
+            </> :
+                <>
+                    <div
+                        className="rounded-xl shadow-sm m-4 lg:mx-40 bg-gray-200 p-2"
+                        x-data="app"
+                    >
+                        <div className="shadow-sm">
+                            <input type="radio" name="option" onClick={handleClick} value={"0"} id="1" className="peer hidden" />
+                            <label htmlFor="1"
+                                className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                            >{selectedBdiQuestion[0]}</label >
+                        </div>
+
+                        <div className="shadow-sm">
+                            <input type="radio" name="option" onClick={handleClick} value={"1"} id="2" className="peer hidden" />
+                            <label htmlFor="2"
+                                className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-yellow-500 hover:text-white peer-checked:bg-yellow-500 peer-checked:font-bold peer-checked:text-white"
+                            >{selectedBdiQuestion[1]}</label >
+                        </div>
+
+                        <div className="shadow-sm">
+                            <input type="radio" name="option" onClick={handleClick} value={"2"} id="3" className="peer hidden" />
+                            <label htmlFor="3"
+                                className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-orange-500 hover:text-white peer-checked:bg-orange-500 peer-checked:font-bold peer-checked:text-white"
+                            >{selectedBdiQuestion[2]}</label >
+                        </div>
+
+                        <div className="shadow-sm">
+                            <input type="radio" name="option" onClick={handleClick} value={"3"} id="4" className="peer hidden" />
+                            <label htmlFor="4"
+                                className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-red-500 hover:text-white peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white"
+                            >{selectedBdiQuestion[3]}</label >
+                        </div>
+                    </div>
+                </>}
+        </main>
     </>
 }

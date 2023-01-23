@@ -3,11 +3,15 @@ import React from "react";
 interface Params {
     handleSubmit(e: React.FormEvent<HTMLFormElement>): void;
     buttonRef: React.LegacyRef<HTMLButtonElement>;
-    registerData: { username: string, age: number, email: string, college: string, course: string };
+    registerData: { username: string, age: number, email: string, college: string, course: string, gender: number };
     setRegisterData: any;
 }
 
 export default function Register({ handleSubmit, buttonRef, registerData, setRegisterData }: Params) {
+    const handleOnClickGender = (e: any) => {
+        const gender = parseInt(e.target.value);
+        setRegisterData((prevState: any) => ({ ...prevState, gender: gender }))
+    }
 
     return <form onSubmit={handleSubmit} id='register' className="m-4">
         <h3 className="mb-4 text-lg font-semibold leading-none text-gray-900 ">User Info</h3>
@@ -31,6 +35,22 @@ export default function Register({ handleSubmit, buttonRef, registerData, setReg
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">Course</label>
                 <input value={registerData.course} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, course: e.target.value }))} type="text" name="course" id="course" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="" required />
+            </div>
+            <div
+                className="flex justify-around rounded-xl bg-gray-100 border border-solid "
+            >
+                <div>
+                    <input type="radio" name="option" checked={registerData.gender === 0} onChange={handleOnClickGender} value={"0"} id="1" className="peer hidden" required />
+                    <label htmlFor="1"
+                        className="block cursor-pointer select-none rounded-xl p-6 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                    >Male</label >
+                </div>
+                <div>
+                    <input type="radio" name="option" checked={registerData.gender === 1} onChange={handleOnClickGender} value={"1"} id="2" className="peer hidden" required />
+                    <label htmlFor="2"
+                        className="block cursor-pointer select-none rounded-xl p-6 text-center hover:bg-red-500 hover:text-white peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white"
+                    >Female</label >
+                </div>
             </div>
         </div>
         <button type="submit" ref={buttonRef} hidden></button>
