@@ -51,8 +51,8 @@ export default function Page() {
             buttonRef.current?.click();
             return;
         }
-        setRenderIndex((index) => Math.min(index + 1, 3));
-        if (renderIndex === 3) {
+        setRenderIndex((index) => Math.min(index + 1, 2));
+        if (renderIndex === 2) {
             console.log(registerData, bai, bdi, comment)
             const data = {
                 bai: bai.total,
@@ -85,7 +85,7 @@ export default function Page() {
     }
     return <>
         <Navbar />
-        <section id="hero-area" className="bg-teal-600 pt-44 pb-10 shadow-md">
+        <section id="hero-area" className="bg-gray-900 pt-44 pb-10 shadow-md">
             <div className="container">
                 <div className="flex justify-between mx-28">
                     <div className="w-full text-center">
@@ -141,13 +141,13 @@ export default function Page() {
                     {renderIndex == 0 && <Register handleSubmit={handleSubmit} buttonRef={buttonRef} registerData={registerData} setRegisterData={setRegisterData} />}
                     {renderIndex == 1 && <BeckAnxiety bai={bai} setBai={setBai} />}
                     {renderIndex == 2 && <BeckDepression bdi={bdi} setBdi={setBdi} />}
-                    {renderIndex == 3 && <CommentBox comment={comment} setComment={setComment} />}
+                    {/* {renderIndex == 3 && <CommentBox comment={comment} setComment={setComment} />} */}
                     <div className="flex justify-end m-4">
                         <button onClick={onClickPrevious} disabled={renderIndex === 0} className="mx-4 text-white disabled:bg-gray-400 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                             Prev
                         </button>
-                        <button ref={buttonRefNext} onClick={onClickNext} disabled={(renderIndex == 3 && (Object.values(bdi).length < 21 || Object.values(bai).length < 21) || (submitted && renderIndex == 3))} className="text-white disabled:bg-gray-400 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                            {renderIndex === 3 ? "Submit" : "Next"}
+                        <button ref={buttonRefNext} onClick={onClickNext} disabled={(renderIndex == 2 && (Object.values(bdi).length <= 21 || Object.values(bai).length <= 21) || (submitted && renderIndex == 2))} className="text-white disabled:bg-gray-400 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                            {renderIndex === 2 ? "Submit" : "Next"}
                         </button>
                     </div>
                 </div>
