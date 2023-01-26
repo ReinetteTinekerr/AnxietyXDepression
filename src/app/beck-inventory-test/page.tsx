@@ -90,8 +90,8 @@ export default function Page() {
             <div className="container">
                 <div className="flex justify-between mx-28">
                     <div className="w-full text-center">
-                        <h6 className="text-3xl md:text-5xl font-bold leading-snug text-white mb-10 wow fadeInUp" data-wow-delay="1s">Beck's Anxiety And
-                            <br className="block" />Beck's Depression Test</h6>
+                        <h6 className="text-3xl md:text-5xl font-bold leading-snug text-white mb-10 wow fadeInUp" data-wow-delay="1s">Beck&apos;s Anxiety And
+                            <br className="block" />Beck&apos;s Depression Test</h6>
                     </div>
                 </div>
             </div>
