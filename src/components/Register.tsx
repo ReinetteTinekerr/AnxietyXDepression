@@ -18,7 +18,7 @@ export default function Register({ handleSubmit, buttonRef, registerData, setReg
         <div className="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                <input value={registerData.username} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, username: e.target.value }))} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="John Doe" required />
+                <input value={registerData.username} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, username: e.target.value }))} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="Full name" required />
             </div>
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">Age</label>
@@ -30,11 +30,11 @@ export default function Register({ handleSubmit, buttonRef, registerData, setReg
             </div>
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">College</label>
-                <input value={registerData.college} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, college: e.target.value }))} type="text" name="college" id="college" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="" required />
+                <input value={registerData.college} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, college: e.target.value }))} type="text" name="college" id="college" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="CCSICT" required />
             </div>
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">Course</label>
-                <input value={registerData.course} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, course: e.target.value }))} type="text" name="course" id="course" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="" required />
+                <input value={registerData.course} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, course: e.target.value }))} type="text" name="course" id="course" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="BSCS 4-1" required />
             </div>
             <div
                 className="flex justify-around rounded-xl bg-gray-100 border border-solid "

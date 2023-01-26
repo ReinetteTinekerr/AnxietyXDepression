@@ -56,11 +56,11 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
 
     const scoreDescription = (total: number) => {
         if (total <= 21) {
-            return "Low Anxiety";
+            return "Low Anxiety : That is usually a good thing. However, It is possible that you might be unrealistic in either your assessment which whould be denial or that you have learned to mask the symptoms commonly associated with anxiety, Too little anxiety could indicate that you are detached from yourself, others, or your environment.";
         } else if (total <= 35) {
-            return "Moderate Anxiety";
+            return "Moderate Anxiety : Your body is trying to tell you something. Look for pattern as to when and why you experience the symptoms described above. For example, IF it occurs prior to public speaking and your job requires a lot presentations you may want to find ways to calm yourself before speaking or let others do some of the presentations. You may have some conflict Issues that need to resolved. Clearly, it is not panic time, but you want to find ways to manage the stress you feel";
         } else {
-            return "High Anxiety";
+            return "Potential Concerning : is a potential cause for concern. Again, look for patterns or times when you tend to feel the symptoms you have circled. Persistent and high anxiety is not a sign of personal weakness or failure. It is, however, something that needs to be proactively threated or there could be significant impacts to you mentally and physically. You may want to consult a physician or counselor if the feeling persist.";
         }
     };
 
