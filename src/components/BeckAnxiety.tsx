@@ -72,7 +72,7 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
     const ShowAnxietyDescription = () => {
         return <main className="flex  items-center flex-col justify-center">
             <div className="h-5"></div>
-            <div className="space-x-2">Anxiety affects millions of Americans and can limit or even hinder daily life. If you&apos;re experiencing frequent worries or fears, you may be struggling with anxiety. Take this anxiety test to determine the severity of your symptoms and if seeking help may be necessary. This test consists of statements for which you will indicate your frequency of feeling that way. </div>
+            <div className="space-x-2">Anxiety affects millions of people and can limit or even hinder daily life. If you&apos;re experiencing frequent worries or fears, you may be struggling with anxiety. Take this anxiety test to determine the severity of your symptoms and if seeking help may be necessary. This test consists of statements for which you will indicate your frequency of feeling that way. </div>
             <div className="h-5"></div>
             <button className=" text-white p-2 shadow-md rounded-md bg-emerald-500 hover:bg-emerald-400" onClick={() => { setAnswering(true) }}>Take the Test</button>
         </main>
@@ -84,10 +84,10 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
                 Your Score is: <span>{bai.total}</span>
                 <br /><span>{scoreDescription(bai.total)}</span></div></> : <><div className="font-semibold text-lg mb-3">{selectedQuestion}</div>
                 <div
-                    className="grid md:grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2"
+                    className="grid md:grid-cols-4 w-60 md:w-auto rounded-xl bg-gray-200 p-2"
                     x-data="app"
                 >
-                    <div>
+                    <div className="">
                         <input type="radio" name="option" onClick={handleClick} value={"0"} id="1" className="peer hidden" />
                         <label htmlFor="1"
                             className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
