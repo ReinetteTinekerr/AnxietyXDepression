@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 let bdiQuestions = [
     {
@@ -133,8 +133,13 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
     const [selectedBdiQuestion, setSelectedBdiQuestion] = useState(bdiQuestions[0]);
     const [selectedIndex, setSelectedIndex] = useState(Object.values(bdi).length - 1);
     const [percentBar, setPercentBar] = useState(selectedIndex);
+    const [answering, setAnswering] = useState(false);
 
     const id = localStorage.getItem("id");
+
+    useEffect(() => {
+        setAnswering(id !== null);
+    }, [id])
 
     const handleClick = (e: any) => {
         if (Object.values(bdi).length === 22) return;
@@ -183,23 +188,18 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
             return "Extreme depression";
         }
     }
-    return <>
-        <div className="flex justify-between">
 
-            <h3 className="m-4 text-xl font-bold leading-none text-gray-900 ">Beck Depression Inventory</h3>
-            <div className="flex flex-row items-center mr-2">
-                <h3 className="mr-2 text-sm leading-none text-gray-900 ">{selectedIndex + 1} / {bdiQuestions.length}</h3>
-                <div className="flex flex-row">
+    const ShowDepressionDescription = () => {
+        return <main className="flex items-center flex-col justify-center">
+            <div className="h-5"></div>
+            <div className="space-x-2 m-3">Everyone experiences sadness at some point, but if it&apos;s interfering with daily life, you may be experiencing depression. Take this depression test to determine the extent of your symptoms and assess the risk of developing a depressive disorder. The test involves examining statements and indicating how well they describe you or how often you feel that way. The results will help you determine if you should consider seeking help.</div>
+            <div className="h-5"></div>
+            <button className=" text-white p-2 shadow-md rounded-md bg-emerald-500 hover:bg-emerald-400" onClick={() => { setAnswering(true) }}>Take the Test</button>
+        </main>
+    }
 
-                    <div className="border-2 rounded-full w-24 h-4 bg-slate-400">
-                        <div className="flex rounded-full w-24 h-3 bg-emerald-500" style={{ "width": `${percentBar}%` }}>
-                        </div>
-                        <div className="text-center justify-center text-sm text-black" >{percentBar}%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <main className="flex  items-center flex-col justify-center">
+    const ShowQuestionsOrResult = () => {
+        return <main className="flex  items-center flex-col justify-center">
             {(Object.values(bdi).length === 22 || id !== null) ? <>
                 <div className={`p-8 text-center text-white font-extrabold text-2xl rounded-md ${scoreBG(bdi.total)}`}>
                     Your Score is: <span>{bdi.total}</span><br />
@@ -240,5 +240,24 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
                     </div>
                 </>}
         </main>
+    }
+    return <>
+        <div className="flex justify-between">
+
+            <h3 className="m-4 text-xl font-bold leading-none text-gray-900 ">Beck Depression Inventory</h3>
+            <div className="flex flex-row items-center mr-2">
+                <h3 className="mr-2 text-sm leading-none text-gray-900 ">{selectedIndex + 1} / {bdiQuestions.length}</h3>
+                <div className="flex flex-row">
+
+                    <div className="border-2 rounded-full w-24 h-4 bg-slate-400">
+                        <div className="flex rounded-full w-24 h-3 bg-emerald-500" style={{ "width": `${percentBar}%` }}>
+                        </div>
+                        <div className="text-center justify-center text-sm text-black" >{percentBar}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {answering ? <ShowQuestionsOrResult /> : <ShowDepressionDescription />}
     </>
 }

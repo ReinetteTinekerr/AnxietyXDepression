@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 let baiQuestions = [
     "1. Numbness or tingling",
@@ -28,9 +28,14 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
     const [selectedIndex, setSelectedIndex] = useState(Object.values(bai).length - 1);
     const [selectedQuestion, setSelectedQuestion] = useState(baiQuestions[selectedIndex]);
     const [percentBar, setPercentBar] = useState(selectedIndex);
+    const [answering, setAnswering] = useState(false);
     // const [bai, setBai] = useState({ total: 0 });
 
     const id = localStorage.getItem("id");
+    useEffect(() => {
+        setAnswering(id !== null);
+    }, [id])
+
     const handleClick = (e: any) => {
         if (Object.values(bai).length === 22) return;
 
@@ -64,28 +69,22 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
         }
     };
 
-    return <div className="m-4">
-        <div className="flex justify-between">
+    const ShowAnxietyDescription = () => {
+        return <main className="flex  items-center flex-col justify-center">
+            <div className="h-5"></div>
+            <div className="space-x-2">Anxiety affects millions of Americans and can limit or even hinder daily life. If you&apos;re experiencing frequent worries or fears, you may be struggling with anxiety. Take this anxiety test to determine the severity of your symptoms and if seeking help may be necessary. This test consists of statements for which you will indicate your frequency of feeling that way. </div>
+            <div className="h-5"></div>
+            <button className=" text-white p-2 shadow-md rounded-md bg-emerald-500 hover:bg-emerald-400" onClick={() => { setAnswering(true) }}>Take the Test</button>
+        </main>
+    }
 
-            <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 ">Beck Anxiety Inventory</h3>
-
-            <div className="flex flex-row items-center mr-2">
-                <h3 className="m-4 text-sm leading-none text-gray-900 ">{selectedIndex + 1} / {baiQuestions.length}</h3>
-                <div className="flex flex-row">
-
-                    <div className="border-2 rounded-full w-24 h-4 bg-slate-400">
-                        <div className="rounded-full w-24 h-3 bg-emerald-500" style={{ "width": `${percentBar}%` }}></div>
-                        <div className="text-center justify-center text-sm text-black" >{percentBar}%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <main className="flex  items-center flex-col justify-center">
+    const ShowQuestionsOrResult = () => {
+        return <main className="flex  items-center flex-col justify-center">
             {(Object.values(bai).length === 22 || id !== null) ? <><div className={`p-8 text-white font-extrabold text-2xl rounded-md ${scoreBG(bai.total)}`}>
                 Your Score is: <span>{bai.total}</span>
                 <br /><span>{scoreDescription(bai.total)}</span></div></> : <><div className="font-semibold text-lg mb-3">{selectedQuestion}</div>
                 <div
-                    className="grid  grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2"
+                    className="grid md:grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2"
                     x-data="app"
                 >
                     <div>
@@ -118,6 +117,26 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
                 </div>
             </>}
         </main>
+    }
+
+    return <div className="m-4">
+        <div className="flex justify-between">
+
+            <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 ">Beck Anxiety Inventory</h3>
+
+            <div className="flex flex-row items-center mr-2">
+                <h3 className="m-4 text-sm leading-none text-gray-900 ">{selectedIndex + 1} / {baiQuestions.length}</h3>
+                <div className="flex flex-row">
+
+                    <div className="border-2 rounded-full w-24 h-4 bg-slate-400">
+                        <div className="rounded-full w-24 h-3 bg-emerald-500" style={{ "width": `${percentBar}%` }}></div>
+                        <div className="text-center justify-center text-sm text-black" >{percentBar}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {answering ? <ShowQuestionsOrResult /> : <ShowAnxietyDescription />}
+        {/* <ShowQuestionsOrResult /> */}
         {/* <div className="flex justify-center">
             <button className="m-2 mx-4 mt-4 rounded-lg hover:bg-slate-400 p-2">
                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>

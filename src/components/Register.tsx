@@ -30,26 +30,40 @@ export default function Register({ handleSubmit, buttonRef, registerData, setReg
             </div>
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">College</label>
-                <input value={registerData.college} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, college: e.target.value }))} type="text" name="college" id="college" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="CCSICT" required />
+                {/* <input value={registerData.college} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, college: e.target.value }))} type="text" name="college" id="college" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="CCSICT" required /> */}
+                <select value={registerData.college} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, college: e.target.value }))} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    <option selected ></option>
+                    <option value={"CCSICT"}>CCSICT</option>
+                </select>
             </div>
             <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">Course</label>
-                <input value={registerData.course} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, course: e.target.value }))} type="text" name="course" id="course" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="BSCS 4-1" required />
+                {/* <input value={registerData.course} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, course: e.target.value }))} type="text" name="course" id="course" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="BSCS" required /> */}
+                <select value={registerData.course} onChange={(e) => setRegisterData((prevState: any) => ({ ...prevState, course: e.target.value }))} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    <option selected ></option>
+                    <option value={"BSCS"}>BSCS</option>
+                    <option value={"BSIT"}>BSIT</option>
+                    <option value={"BSIS"}>BSIS</option>
+                    <option value={"BLIS"}>BLIS</option>
+                </select>
             </div>
-            <div
-                className="flex justify-around rounded-xl bg-gray-100 border border-solid "
-            >
-                <div>
-                    <input type="radio" name="option" checked={registerData.gender === 0} onChange={handleOnClickGender} value={"0"} id="1" className="peer hidden" required />
-                    <label htmlFor="1"
-                        className="block cursor-pointer select-none rounded-xl p-6 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
-                    >Male</label >
-                </div>
-                <div>
-                    <input type="radio" name="option" checked={registerData.gender === 1} onChange={handleOnClickGender} value={"1"} id="2" className="peer hidden" required />
-                    <label htmlFor="2"
-                        className="block cursor-pointer select-none rounded-xl p-6 text-center hover:bg-red-500 hover:text-white peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white"
-                    >Female</label >
+            <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900 ">Gender</label>
+                <div
+                    className="flex justify-around rounded-xl bg-gray-100 border border-solid "
+                >
+                    <div>
+                        <input type="radio" name="option" checked={registerData.gender === 0} onChange={handleOnClickGender} value={"0"} id="1" className="peer hidden" required />
+                        <label htmlFor="1"
+                            className="block cursor-pointer select-none rounded-xl p-5 w-24 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                        >Male</label >
+                    </div>
+                    <div>
+                        <input type="radio" name="option" checked={registerData.gender === 1} onChange={handleOnClickGender} value={"1"} id="2" className="peer hidden" required />
+                        <label htmlFor="2"
+                            className="block cursor-pointer select-none rounded-xl p-5 w-24 text-center hover:bg-red-500 hover:text-white peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white"
+                        >Female</label >
+                    </div>
                 </div>
             </div>
         </div>

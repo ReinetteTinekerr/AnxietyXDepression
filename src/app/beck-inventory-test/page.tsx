@@ -45,15 +45,17 @@ export default function Page() {
     }
 
     const onClickNext = () => {
-        console.log(registerData);
+        // console.log(registerData);
 
         if (renderIndex === 0) {
             buttonRef.current?.click();
             return;
         }
         setRenderIndex((index) => Math.min(index + 1, 2));
+
+        // Submit
         if (renderIndex === 2) {
-            console.log(registerData, bai, bdi, comment)
+            // console.log(registerData, bai, bdi, comment)
             const data = {
                 bai: bai.total,
                 bdi: bdi.total,
@@ -64,7 +66,7 @@ export default function Page() {
             try {
 
                 addDoc(collection(db, "responses"), data).then((res) => {
-                    console.log(res.id);
+                    // console.log(res.id);
                     localStorage.setItem("id", res.id);
                     setShowPopup(true);
                     setSubmitted(true);
