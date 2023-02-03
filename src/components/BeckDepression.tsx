@@ -141,6 +141,9 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
         setAnswering(id !== null);
     }, [id])
 
+    const clickNewWindowSummary = () => {
+        window.open(`/beck-inventory-test/summary?score=${bdi.total}&summary=1&level=${depressionLevel(bdi.total)}`, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=350')
+    }
     const handleClick = (e: any) => {
         if (Object.values(bdi).length === 22) return;
 
@@ -167,7 +170,6 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
         } else if (total <= 30) {
             return "bg-amber-500";
         } else if (total <= 40) {
-
             return "bg-orange-500";
         } else {
             return "bg-red-500";
@@ -189,6 +191,23 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
         }
     }
 
+    const depressionLevel = (total: number) => {
+        if (total <= 10) {
+            return 0;
+        } else if (total <= 16) {
+            return 1;
+        } else if (total <= 20) {
+            return 2;
+        } else if (total <= 30) {
+            return 3;
+        } else if (total <= 40) {
+            return 4;
+        } else {
+            return 5;
+        }
+
+    }
+
     const ShowDepressionDescription = () => {
         return <main className="flex items-center flex-col justify-center">
             <div className="h-5"></div>
@@ -204,6 +223,7 @@ export default function BeckDepression({ bdi, setBdi }: { bdi: any, setBdi: any 
                 <div className={`p-8 text-center text-white font-extrabold text-2xl rounded-md ${scoreBG(bdi.total)}`}>
                     Your Score is: <span>{bdi.total}</span><br />
                     <span>{scoreDescription(bdi.total)}</span></div>
+                <button onClick={clickNewWindowSummary} className="text-white mt-5 disabled:bg-gray-400 bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Summary</button>
             </> :
                 <>
                     <div

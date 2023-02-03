@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+'use client'
+import { useEffect, useState, } from "react";
 
 let baiQuestions = [
     "1. Numbness or tingling",
@@ -31,11 +32,15 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
     const [answering, setAnswering] = useState(false);
     // const [bai, setBai] = useState({ total: 0 });
 
+
     const id = localStorage.getItem("id");
     useEffect(() => {
         setAnswering(id !== null);
     }, [id])
 
+    const clickNewWindowSummary = () => {
+        window.open(`/beck-inventory-test/summary?score=${bai.total}&summary=0&level=${anxietyLevel(bai.total)}`, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=400,height=350')
+    }
     const handleClick = (e: any) => {
         if (Object.values(bai).length === 22) return;
 
@@ -59,13 +64,24 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
         }
     };
 
+    const anxietyLevel = (total: number) => {
+        if (total <= 21) {
+            return 0
+        } else if (total <= 35) {
+            return 1
+        } else {
+            return 2
+        }
+
+    }
+
     const scoreDescription = (total: number) => {
         if (total <= 21) {
-            return "Low Anxiety : That is usually a good thing. However, It is possible that you might be unrealistic in either your assessment which whould be denial or that you have learned to mask the symptoms commonly associated with anxiety, Too little anxiety could indicate that you are detached from yourself, others, or your environment.";
+            return "Low Anxiety";
         } else if (total <= 35) {
-            return "Moderate Anxiety : Your body is trying to tell you something. Look for pattern as to when and why you experience the symptoms described above. For example, IF it occurs prior to public speaking and your job requires a lot presentations you may want to find ways to calm yourself before speaking or let others do some of the presentations. You may have some conflict Issues that need to resolved. Clearly, it is not panic time, but you want to find ways to manage the stress you feel";
+            return "Moderate Anxiety";
         } else {
-            return "Potential Concerning : is a potential cause for concern. Again, look for patterns or times when you tend to feel the symptoms you have circled. Persistent and high anxiety is not a sign of personal weakness or failure. It is, however, something that needs to be proactively threated or there could be significant impacts to you mentally and physically. You may want to consult a physician or counselor if the feeling persist.";
+            return "Potential Concerning";
         }
     };
 
@@ -82,7 +98,9 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
         return <main className="flex  items-center flex-col justify-center">
             {(Object.values(bai).length === 22 || id !== null) ? <><div className={`p-8 text-white font-extrabold text-2xl rounded-md ${scoreBG(bai.total)}`}>
                 Your Score is: <span>{bai.total}</span>
-                <br /><span>{scoreDescription(bai.total)}</span></div></> : <><div className="font-semibold text-lg mb-3">{selectedQuestion}</div>
+                <br /><span>{scoreDescription(bai.total)}</span></div>
+                <button onClick={clickNewWindowSummary} className="text-white mt-5 disabled:bg-gray-400 bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Summary</button>
+            </> : <><div className="font-semibold text-lg mb-3">{selectedQuestion}</div>
                 <div
                     className="grid md:grid-cols-4 w-60 md:w-auto rounded-xl bg-gray-200 p-2"
                     x-data="app"

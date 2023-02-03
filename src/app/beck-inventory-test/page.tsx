@@ -1,13 +1,14 @@
 'use client'
 import BeckAnxiety from "@/components/BeckAnxiety";
 import BeckDepression from "@/components/BeckDepression";
-import CommentBox from "@/components/Comment";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Register from "@/components/Register";
 import { useState, useRef, useEffect } from "react";
 import { getDoc, doc, addDoc, Timestamp, collection } from "firebase/firestore";
 import { db } from "../../utils/firebaseInit";
+
+
 
 export default function Page() {
     const [renderIndex, setRenderIndex] = useState(0);
@@ -20,6 +21,7 @@ export default function Page() {
     const [comment, setComment] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+
 
     useEffect(() => {
         const id = localStorage.getItem("id");
