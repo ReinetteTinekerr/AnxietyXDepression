@@ -105,28 +105,28 @@ export default function BeckAnxiety({ bai, setBai }: { bai: any, setBai: any }) 
                     className="grid md:grid-cols-4 w-60 md:w-auto rounded-xl bg-gray-200 p-2"
                     x-data="app"
                 >
-                    <div className="">
+                    <div className="shadow-sm">
                         <input type="radio" name="option" onClick={handleClick} value={"0"} id="1" className="peer hidden" />
                         <label htmlFor="1"
                             className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-blue-500 hover:text-white peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
                         >Not at All</label >
                     </div>
 
-                    <div>
+                    <div className="shadow-sm">
                         <input type="radio" name="option" onClick={handleClick} value={"1"} id="2" className="peer hidden" />
                         <label htmlFor="2"
                             className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-yellow-500 hover:text-white peer-checked:bg-yellow-500 peer-checked:font-bold peer-checked:text-white"
                         >Mild</label >
                     </div>
 
-                    <div>
+                    <div className="shadow-sm">
                         <input type="radio" name="option" onClick={handleClick} value={"2"} id="3" className="peer hidden" />
                         <label htmlFor="3"
                             className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-orange-500 hover:text-white peer-checked:bg-orange-500 peer-checked:font-bold peer-checked:text-white"
                         >Moderately</label >
                     </div>
 
-                    <div>
+                    <div className="shadow-sm">
                         <input type="radio" name="option" onClick={handleClick} value={"3"} id="4" className="peer hidden" />
                         <label htmlFor="4"
                             className="block cursor-pointer select-none rounded-xl p-2 text-center hover:bg-red-500 hover:text-white peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white"

@@ -87,6 +87,12 @@ export default function Summary() {
         return 0;
     }
 
+    const closeTab = () => {
+        window.opener = null;
+        window.open("", "_self");
+        window.close();
+    };
+
     const percentBarColor = () => {
         if (beckType() === 'Anxiety') {
             switch (level) {
@@ -122,6 +128,7 @@ export default function Summary() {
     return <>
         <main>
             <section className="shadow-lg rounded-md p-5">
+                <button onClick={closeTab} className="hover:scale-110 transition duration-300 hover:bg-gray-200 rounded-full p-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" /> </svg></button>
                 <div className="text-xl font-bold">Snapshot Report</div>
                 <div className="font-semibold">Overall {beckType()}: {score}</div>
                 <div className="flex flex-row mt-2">
