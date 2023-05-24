@@ -1,4 +1,8 @@
+'use client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './globals.css'
+
+const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnMount: false } } })
 
 export default function RootLayout({
   children,
@@ -12,7 +16,9 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <QueryClientProvider client={queryClient}>
+        <body>{children}</body>
+      </QueryClientProvider>
     </html>
   )
 }
